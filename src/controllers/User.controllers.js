@@ -5,7 +5,7 @@ import { creartoken } from "../libs/jwt.js";
 //Registro:
 
 export const register = async (req,res) =>{
-    const {email,password, username} =  req.body;
+    const {email,password, username , role} =  req.body;
 
     try{
         //validamos que no haya otro registrado con el mimso email
@@ -21,6 +21,7 @@ export const register = async (req,res) =>{
             username,
             email,
             password : contraseñaHash,
+            role: role || 'client'
         })
 
         const usuarioguardado = await nuevousuario.save();
@@ -32,6 +33,7 @@ export const register = async (req,res) =>{
             id: usuarioguardado._id,
             username: usuarioguardado.username,
             email : usuarioguardado.email,
+            role: usuarioguardado.role
         })
 
     }catch(err){
@@ -69,6 +71,7 @@ export const login = async (req,res) =>{
             id: buscarusuario._id,
             username: buscarusuario.username,
             email : buscarusuario.email,
+            role : buscarusuario.role,
             message : "login correcto",
         })
 
