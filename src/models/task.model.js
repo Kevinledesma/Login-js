@@ -24,6 +24,9 @@ const taskschema = new mongoose.Schema({
         required: true,
 
     },
+    foto: {
+        type: String // Campo para almacenar la ruta de la foto
+    }
 
 },{
     timestamps : true

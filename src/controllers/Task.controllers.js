@@ -55,11 +55,13 @@ export const createtask = async (req, res) => {
         // Solo se permitirá crear una tarea si el usuario es un administrador
         if (req.user.role === 'admin') {
             const { titulo, descripcion, data } = req.body;
+            const photo = req.file;
             const newTask = new Task({
                 titulo,
                 descripcion,
                 data,
                 user: req.user.id,
+                foto: photo ? photo.filename : null // Guardar el nombre del archivo de foto si está presente
             });
             const nuevaTarea = await newTask.save();
             return res.json(nuevaTarea);

@@ -11,6 +11,9 @@ import {
   addTaskToProfile,
 } from "../controllers/Task.controllers.js";
 
+//multer para las fotos
+import { upload } from "../middlewares/multer.config.js";
+
 //middlewares:
 import { validaruser } from "../middlewares/validarToken.js";
 import { validarschema } from "../middlewares/validar.middleware.js";
@@ -30,7 +33,7 @@ router.get("/task/:id", onetask);
 router.post("/tasks/:id/add-to-profile", validaruser, addTaskToProfile);
 
 //gestion de tareas, solo para administradores
-router.post("/task", validaruser, validarschema(schematask), createtask);
+router.post("/task", validaruser, validarschema(schematask),upload.single('photo'), createtask);
 router.delete("/task/:id", validaruser, deletetask);
 router.put("/task/:id", validaruser, updatetask);
 
