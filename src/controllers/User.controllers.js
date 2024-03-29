@@ -11,7 +11,7 @@ export const register = async (req,res) =>{
         //validamos que no haya otro registrado con el mimso email
         const BuscarUser = await User.findOne({email});
         if(BuscarUser){
-            return res.status(400).json({message: "el email ya existe"})
+            return res.status(400).json(["el email ya existe"])
         }
 
         //hasheamos contraseña

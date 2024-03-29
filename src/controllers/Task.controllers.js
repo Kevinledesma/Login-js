@@ -4,6 +4,7 @@ export const alltask = async (req, res) => {
     try {
         // Se permitirá que todos los usuarios vean todas las tareas disponibles
         const allTasks = await Task.find({});
+        
         return res.json(allTasks);
     } catch (err) {
         console.log(err);
